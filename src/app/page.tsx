@@ -1,9 +1,19 @@
-import React from 'react'
+import Hero from '@/components/Hero';
+import CountUpStat from '@/components/CountUpStat';
+import Services from '@/components/Services';
+import PricingTable from '@/components/PricingTable';
+import FAQ from '@/components/FAQ';
+import Footer from '@/components/Footer';
 
-const Home = () => {
+export default function HomePage() {
   return (
-    <div>Home</div>
-  )
+    <main>
+      <Hero />
+      <CountUpStat />
+      <Services />
+      <PricingTable />
+      <FAQ />
+      <Footer />
+    </main>
+  );
 }
-
-export default Home
