@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
@@ -12,27 +12,34 @@ export default function ThemeToggle() {
   }, []);
   
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    console.log('Current theme:', theme, 'Switching to:', newTheme);
-    setTheme(newTheme);
+    if (theme === 'dark') {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
   };
   
   useEffect(() => {
     if (mounted) {
       console.log('Theme changed to:', theme);
+      console.log('Resolved theme:', resolvedTheme);
       console.log('HTML classList:', document.documentElement.classList.toString());
+      console.log('Body background:', getComputedStyle(document.body).backgroundColor);
     }
-  }, [theme, mounted]);
+  }, [theme, resolvedTheme, mounted]);
   
   if (!mounted) return null;
   
   return (
-    <button
-      onClick={toggleTheme}
-      aria-label="Toggle theme"
-      className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-700 dark:text-gray-300"
-    >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-    </button>
+    <div className="flex items-center gap-2">
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+        className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-700 dark:text-gray-300"
+      >
+        {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+      </button>
+    
+    </div>
   );
 }

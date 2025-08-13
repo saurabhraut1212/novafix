@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative h-[75vh] w-full">
+    <section className="relative h-[75vh] w-full bg-white dark:bg-gray-900">
       <div className="absolute inset-0">
       <Image
         src="/images/hero.jpg"
