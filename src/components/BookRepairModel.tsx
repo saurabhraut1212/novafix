@@ -1,30 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-import Button from './ui/button';
+import { useState, useMemo } from 'react';
 import { Dialog } from './ui/dialog';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { deviceOptions, timeSlots } from '../data/devices';
+
+
 
 // Validation Schema
 const schema = yup.object({
-  name: yup.string().required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  phone: yup
-    .string()
-    .required('Phone is required')
-    .matches(/^[0-9]{10}$/, 'Phone must be 10 digits'),
-  device: yup.string().required('Device is required'),
-  issue: yup.string().required('Issue is required'),
-  time: yup.string().required('Preferred time is required'),
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  phone: yup.string().matches(/^[0-9]{10}$/, 'Phone must be 10 digits').required(),
+  deviceType: yup.string().required(),
+  deviceModel: yup.string().required(),
+  issue: yup.string().required(),
+  date: yup.string().required('Date is required'),
+  slot: yup.string().required('Slot is required'),
 });
 
 type FormData = yup.InferType<typeof schema>;
 
 export default function BookRepairModal() {
   const [submitted, setSubmitted] = useState(false);
+  const [globalError, setGlobalError] = useState('');
+  const [deviceType, setDeviceType] = useState('');
 
   const {
     register,
@@ -32,10 +35,21 @@ export default function BookRepairModal() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
-    resolver: yupResolver(schema) ,
+    resolver: yupResolver(schema),
   });
 
+  const modelsForSelectedType = useMemo(() => {
+    return deviceType ? deviceOptions[deviceType] || [] : [];
+  }, [deviceType]);
+
   const onSubmit = async (data: FormData) => {
+    // Show one global error message if any field invalid
+    if (Object.keys(errors).length > 0) {
+      setGlobalError('Please fill all required fields correctly.');
+      return;
+    }
+    setGlobalError('');
+
     try {
       await fetch('/api/book', {
         method: 'POST',
@@ -51,85 +65,153 @@ export default function BookRepairModal() {
     }
   };
 
+  const handleClose = () => {
+    reset();
+    setSubmitted(false);
+    setGlobalError('');
+  };
+
   return (
     <Dialog
-      trigger={<Button className="bg-yellow-400 text-black">Book Repair</Button>}
+      onOpenChange={(open) => {
+        if (!open) handleClose();
+      }}
+      trigger={
+        <button
+          className="px-8 py-3 text-lg font-semibold border border-yellow-400 text-yellow-400 rounded-lg
+                     bg-transparent transition-all duration-200
+                     hover:bg-yellow-400 hover:text-black
+                     active:bg-yellow-500 active:text-black
+                     focus:outline-none focus:ring-1 focus:ring-yellow-300"
+        >
+          Book Repair
+        </button>
+      }
     >
       {!submitted ? (
         <>
-          <h3 className="text-xl font-semibold mb-2">Book a Repair</h3>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <h3 className="text-xl font-semibold mb-2 text-center">Book a Repair</h3>
+
+          <form
+           onSubmit={handleSubmit(
+           onSubmit, // ✅ runs if validation passes
+           () => setGlobalError('Please fill all required fields correctly.') // ✅ runs if validation fails
+         )}
+         className="space-y-4"
+     >
             <div>
-              <input
-                {...register('name')}
-                className="w-full p-2 border rounded"
-                placeholder="Name"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
-              )}
+              <label className="block text-sm font-medium">Name <span className="text-red-500">*</span></label>
+              <input {...register('name')} className="w-full p-2 border rounded" placeholder="Enter your name" />
             </div>
 
             <div>
-              <input
-                {...register('email')}
-                className="w-full p-2 border rounded"
-                placeholder="Email"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
+              <label className="block text-sm font-medium">Email <span className="text-red-500">*</span></label>
+              <input {...register('email')} className="w-full p-2 border rounded" placeholder="Enter your email" />
             </div>
 
             <div>
-              <input
+              <label className="block text-sm font-medium">Phone <span className="text-red-500">*</span></label>
+             <input
+                type="tel"
                 {...register('phone')}
+                onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                }}
                 className="w-full p-2 border rounded"
-                placeholder="Phone"
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm">{errors.phone.message}</p>
-              )}
+                placeholder="10-digit phone number"
+                />
             </div>
+
+           <div className="flex gap-4">
+            {/* Device Type */}
+            <div className="flex-1">
+                <label className="block text-sm font-medium">
+                Device Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                {...register('deviceType')}
+                onChange={(e) => setDeviceType(e.target.value)}
+                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                >
+                <option value="">Select device type</option>
+                {Object.keys(deviceOptions).map((type) => (
+                    <option key={type} value={type}>
+                    {type}
+                    </option>
+                ))}
+                </select>
+            </div>
+
+            {/* Device Model */}
+            <div className="flex-1">
+                <label className="block text-sm font-medium">
+                Device Model <span className="text-red-500">*</span>
+                </label>
+                <select
+                {...register('deviceModel')}
+                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                >
+                <option value="">Select model</option>
+                {modelsForSelectedType.map((model) => (
+                    <option key={model} value={model}>
+                    {model}
+                    </option>
+                ))}
+                </select>
+            </div>
+            </div>
+
+           {/* Date & Slot Selection in Single Row */}
+            <div className="flex gap-4">
+            {/* Date Selection */}
+            <div className="flex-1">
+                <label className="block text-sm font-medium">
+                Select Date <span className="text-red-500">*</span>
+                </label>
+                <input
+                type="date"
+                {...register('date')}
+                min={new Date().toISOString().split('T')[0]} // Prevent past dates
+                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                />
+            </div>
+
+            {/* Slot Selection */}
+            <div className="flex-1">
+                <label className="block text-sm font-medium">
+                Select Time Slot <span className="text-red-500">*</span>
+                </label>
+                <select
+                {...register('slot')}
+                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                >
+                <option value="">Select a slot</option>
+                {timeSlots.map((slot) => (
+                    <option key={slot} value={slot}>
+                    {slot}
+                    </option>
+                ))}
+                </select>
+            </div>
+            </div>
+
 
             <div>
-              <input
-                {...register('device')}
-                className="w-full p-2 border rounded"
-                placeholder="Device (e.g. iPhone 13)"
-              />
-              {errors.device && (
-                <p className="text-red-500 text-sm">{errors.device.message}</p>
-              )}
+              <label className="block text-sm font-medium">Issue <span className="text-red-500">*</span></label>
+              <input {...register('issue')} className="w-full p-2 border rounded" placeholder="Describe the issue" />
             </div>
 
-            <div>
-              <input
-                {...register('issue')}
-                className="w-full p-2 border rounded"
-                placeholder="Issue (e.g. screen crack)"
-              />
-              {errors.issue && (
-                <p className="text-red-500 text-sm">{errors.issue.message}</p>
-              )}
-            </div>
+          
 
-            <div>
-              <input
-                {...register('time')}
-                className="w-full p-2 border rounded"
-                placeholder="Preferred time"
-              />
-              {errors.time && (
-                <p className="text-red-500 text-sm">{errors.time.message}</p>
-              )}
-            </div>
+               {globalError && (
+            <p className="text-red-500 text-sm mb-3 text-center">{globalError}</p>
+          )}
 
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-2 rounded bg-indigo-600 text-white disabled:opacity-50"
+                className="px-6 py-2 rounded bg-indigo-600 text-white shadow-lg disabled:opacity-50"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>

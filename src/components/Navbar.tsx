@@ -11,7 +11,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <Button >
-            <Link href="#book">Book Repair</Link>
+            <Link href="/#book">Book Repair</Link>
           </Button>
         </div>
       </div>
