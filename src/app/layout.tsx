@@ -10,8 +10,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100 antialiased transition-colors duration-200">
         <ThemeProviders>
           <Navbar />
           <Toaster position="top-right" reverseOrder={false} />
