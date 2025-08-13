@@ -76,17 +76,19 @@ export default function BookRepairModal() {
       onOpenChange={(open) => {
         if (!open) handleClose();
       }}
-      trigger={
-        <button
-          className="px-8 py-3 text-lg font-semibold border border-yellow-400 text-yellow-400 rounded-lg
-                     bg-transparent transition-all duration-200
-                     hover:bg-yellow-400 hover:text-black
-                     active:bg-yellow-500 active:text-black
-                     focus:outline-none focus:ring-1 focus:ring-yellow-300"
-        >
-          Book Repair
-        </button>
-      }
+     trigger={
+    <button
+        className="px-8 py-3 text-lg font-semibold rounded-lg
+                bg-yellow-400 text-black
+                transition-all duration-200
+                hover:bg-yellow-500
+                active:bg-yellow-600
+                dark:hover:bg-yellow-300
+                focus:outline-none focus:ring-2 focus:ring-yellow-300"
+    >
+        Book Repair
+    </button>
+}
     >
       {!submitted ? (
         <>
