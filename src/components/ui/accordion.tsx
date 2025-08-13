@@ -14,7 +14,7 @@ export function Accordion({ items }: { items: { title: string; content: string }
         >
           <RadixAccordion.Header>
             <RadixAccordion.Trigger
-              className="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+              className="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
             >
               {it.title}
               <ChevronDown className="h-5 w-5 transition-transform data-[state=open]:rotate-180" />
@@ -22,7 +22,7 @@ export function Accordion({ items }: { items: { title: string; content: string }
           </RadixAccordion.Header>
 
           <RadixAccordion.Content
-            className="px-5 pb-4 text-gray-600 dark:text-gray-300 text-sm mt-2 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+            className="px-5 pb-4 text-gray-700 dark:text-gray-300 text-sm mt-2 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             {it.content}
           </RadixAccordion.Content>

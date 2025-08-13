@@ -26,7 +26,7 @@ export function Dialog({ children, trigger, onOpenChange }: DialogProps) {
         >
           {children}
           <RadixDialog.Close
-            className="absolute right-3 top-3 rounded-md px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="absolute right-3 top-3 rounded-md px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             ✕
           </RadixDialog.Close>

@@ -5,10 +5,10 @@ import Button from './ui/button';
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900/60 backdrop-blur border-b dark:border-gray-800">
+    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900/60 backdrop-blur border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
         
-        <Link href="/" className="font-bold text-3xl tracking-tight">
+        <Link href="/" className="font-bold text-3xl tracking-tight text-gray-900 dark:text-white">
           NovaFix
         </Link>
         

@@ -8,7 +8,7 @@ export default function Button({ children, className, ...props }: React.ButtonHT
       {...props}
       className={clsx(
         'inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium shadow-sm transition',
-        'bg-brand-500 text-white hover:bg-indigo-600',
+        'bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700',
         className
       )}
     >

@@ -90,36 +90,37 @@ export default function BookRepairModal() {
     </button>
 }
     >
+        <div className="max-h-[90vh] overflow-y-auto px-2 sm:px-4">
       {!submitted ? (
         <>
-          <h3 className="text-xl font-semibold mb-2 text-center">Book a Repair</h3>
+          <h3 className="text-xl font-semibold mb-2 text-center text-gray-900 dark:text-white">Book a Repair</h3>
 
           <form
            onSubmit={handleSubmit(
-           onSubmit, // ✅ runs if validation passes
-           () => setGlobalError('Please fill all required fields correctly.') // ✅ runs if validation fails
+           onSubmit, 
+           () => setGlobalError('Please fill all required fields correctly.') 
          )}
          className="space-y-4"
      >
             <div>
-              <label className="block text-sm font-medium">Name <span className="text-red-500">*</span></label>
-              <input {...register('name')} className="w-full p-2 border rounded" placeholder="Enter your name" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-white">Name <span className="text-red-500">*</span></label>
+              <input {...register('name')} className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" placeholder="Enter your name" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Email <span className="text-red-500">*</span></label>
-              <input {...register('email')} className="w-full p-2 border rounded" placeholder="Enter your email" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-white">Email <span className="text-red-500">*</span></label>
+              <input {...register('email')} className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" placeholder="Enter your email" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Phone <span className="text-red-500">*</span></label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-white">Phone <span className="text-red-500">*</span></label>
              <input
                 type="tel"
                 {...register('phone')}
                 onInput={(e) => {
                     e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
                 }}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                 placeholder="10-digit phone number"
                 />
             </div>
@@ -127,13 +128,13 @@ export default function BookRepairModal() {
            <div className="flex gap-4">
             {/* Device Type */}
             <div className="flex-1">
-                <label className="block text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 Device Type <span className="text-red-500">*</span>
                 </label>
                 <select
                 {...register('deviceType')}
                 onChange={(e) => setDeviceType(e.target.value)}
-                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                 <option value="">Select device type</option>
                 {Object.keys(deviceOptions).map((type) => (
@@ -146,12 +147,12 @@ export default function BookRepairModal() {
 
             {/* Device Model */}
             <div className="flex-1">
-                <label className="block text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 Device Model <span className="text-red-500">*</span>
                 </label>
                 <select
                 {...register('deviceModel')}
-                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                 <option value="">Select model</option>
                 {modelsForSelectedType.map((model) => (
@@ -163,29 +164,28 @@ export default function BookRepairModal() {
             </div>
             </div>
 
-           {/* Date & Slot Selection in Single Row */}
+       
             <div className="flex gap-4">
-            {/* Date Selection */}
             <div className="flex-1">
-                <label className="block text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 Select Date <span className="text-red-500">*</span>
                 </label>
                 <input
                 type="date"
                 {...register('date')}
-                min={new Date().toISOString().split('T')[0]} // Prevent past dates
-                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                min={new Date().toISOString().split('T')[0]} 
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
             </div>
 
             {/* Slot Selection */}
             <div className="flex-1">
-                <label className="block text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 Select Time Slot <span className="text-red-500">*</span>
                 </label>
                 <select
                 {...register('slot')}
-                className="w-full p-2 border rounded bg-white text-black dark:bg-gray-700 dark:text-white"
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                 <option value="">Select a slot</option>
                 {timeSlots.map((slot) => (
@@ -199,8 +199,8 @@ export default function BookRepairModal() {
 
 
             <div>
-              <label className="block text-sm font-medium">Issue <span className="text-red-500">*</span></label>
-              <input {...register('issue')} className="w-full p-2 border rounded" placeholder="Describe the issue" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-white">Issue <span className="text-red-500">*</span></label>
+              <input {...register('issue')} className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" placeholder="Describe the issue" />
             </div>
 
           
@@ -222,12 +222,13 @@ export default function BookRepairModal() {
         </>
       ) : (
          <div className="flex flex-col items-center justify-center min-h-[25vh] text-center">
-         <h3 className="text-2xl font-semibold mb-2">Thanks — request received</h3>
-         <p className="text-gray-600 dark:text-gray-300">
+         <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Thanks — request received</h3>
+         <p className="text-gray-700 dark:text-gray-300">
           Our technician will contact you shortly.
          </p>
          </div>
       )}
+      </div>
     </Dialog>
   );
 }

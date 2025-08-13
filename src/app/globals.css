@@ -4,18 +4,27 @@
 
 html {
   scroll-behavior: smooth;
+  /* Default (light) theme background and text */
+  background-color: #ffffff;
+  color: #18181b;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-html {
-  scroll-behavior: smooth;
-  /* Default (light) theme background and text */
-  background-color: #fff;
+body {
+  /* Ensure body also gets the background color */
+  background-color: #ffffff;
   color: #18181b;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html.dark {
   /* Dark mode background and text */
+  background-color: #18181b;
+  color: #f1f5f9;
+}
+
+html.dark body {
+  /* Ensure body also gets the dark background color */
   background-color: #18181b;
   color: #f1f5f9;
 }

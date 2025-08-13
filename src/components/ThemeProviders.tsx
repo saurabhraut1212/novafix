@@ -2,9 +2,14 @@
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
 
-const ThemeProviders=({ children }: { children: React.ReactNode })=> {
+const ThemeProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system">
+    <ThemeProvider 
+      attribute="class" 
+      defaultTheme="system" 
+      enableSystem={true}
+      disableTransitionOnChange={false}
+    >
       {children}
     </ThemeProvider>
   );
