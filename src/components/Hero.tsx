@@ -26,13 +26,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl sm:text-5xl font-bold max-w-3xl"
+          className="text-4xl sm:text-5xl font-semibold max-w-3xl"
         >
-          Fast, reliable on-site repairs — within 60 minutes
+          Fast, reliable on-site repairs within 60 minutes
         </motion.h1>
 
         <p className="mt-4 text-base sm:text-lg text-indigo-100 max-w-2xl">
-          We come to your place, diagnose and fix smartphones & laptops quickly — high-quality parts, certified technicians.
+          We come to your place, diagnose and fix smartphones & laptops quickly — high quality parts, certified technicians.
         </p>
 
         {/* Bigger Button */}

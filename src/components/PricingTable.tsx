@@ -4,7 +4,7 @@ export default function PricingTable() {
   return (
     <section className="py-8 px-4">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Price Examples</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center">Price Examples</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>

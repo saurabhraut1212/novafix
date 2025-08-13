@@ -219,12 +219,12 @@ export default function BookRepairModal() {
           </form>
         </>
       ) : (
-        <div className="text-center">
-          <h3 className="text-xl font-semibold">Thanks — request received</h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Our technician will contact you shortly.
-          </p>
-        </div>
+         <div className="flex flex-col items-center justify-center min-h-[25vh] text-center">
+         <h3 className="text-2xl font-semibold mb-2">Thanks — request received</h3>
+         <p className="text-gray-600 dark:text-gray-300">
+          Our technician will contact you shortly.
+         </p>
+         </div>
       )}
     </Dialog>
   );
