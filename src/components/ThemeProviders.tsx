@@ -4,7 +4,12 @@ import React from 'react';
 
 const ThemeProviders=({ children }: { children: React.ReactNode })=> {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system">
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       {children}
     </ThemeProvider>
   );
