@@ -1,6 +1,7 @@
 import './globals.css';
 import ThemeProviders from '@/components/ThemeProviders';
 import Navbar from '@/components/Navbar';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'NovaFix - Fast Device Repairs',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProviders>
           <Navbar />
+          <Toaster position="top-right" reverseOrder={false} />
           {children}
         </ThemeProviders>
       </body>

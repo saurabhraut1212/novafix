@@ -12,7 +12,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl sm:text-4xl font-bold"
         >
-          Fast, reliable on-site repairs — <span className="underline">within 60 minutes</span>
+          Fast, reliable on-site repairs — within 60 minutes
         </motion.h1>
         <p className="mt-3 text-sm sm:text-base text-indigo-100/90 max-w-2xl mx-auto">
           We come to your place, diagnose and fix smartphones & laptops quickly — high-quality parts, certified technicians.
