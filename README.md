@@ -56,6 +56,20 @@ This project uses the following libraries:
 -  **Footer** - Footer section shows the links to the particular section
 -  **CountStatComponent** - It is showing the counter value of repaired no of mobiles/laptops
   ---
+
+## Library and packages used 
+
+| Package           | Explanation                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **next**          | React framework for building server-rendered, static, and hybrid web apps with built-in routing and optimizations. |
+| **react**         | JavaScript library for building user interfaces using components and state management.                             |
+| **tailwindcss**   | Utility-first CSS framework for rapidly building custom, responsive designs directly in your markup.               |
+| **next-themes**   | A theme management library for Next.js that enables easy light/dark mode toggling with persistence.                |
+| **framer-motion** | Animation library for React that provides simple yet powerful motion and gesture-based animations.                 |
+| **react-countup** | React component that animates numbers counting up for stats and metrics displays.                                  |
+| **lucide-react**  | Collection of customizable, lightweight SVG icons as React components.                                             |
+| **cursor**        | AI-powered code editor that assists with code generation, refactoring, and debugging directly in your IDE.         |
+
 ## 📦 Installation
 
 Clone the repository and install dependencies:
